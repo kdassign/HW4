@@ -293,7 +293,7 @@ const questionBank = [{
       </button>
       </div>
     </div>`
- // scores sent to the local storage
+ // scores sent to the local storage (example from stackpath)
     document.getElementById('submit').addEventListener('click', event => {
       event.preventDefault()
       let name = document.getElementById('name').value

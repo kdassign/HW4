@@ -1,4 +1,4 @@
-
+// stores high scores w/ initials
 let highScores = JSON.parse(localStorage.getItem('highScores'))
 console.log(highScores)
 if (highScores[0].name === 'Empty') {

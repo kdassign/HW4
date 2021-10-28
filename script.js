@@ -1,4 +1,4 @@
-
+// loads questions for the quiz
 const questionBank = [{
     question: 'Which one is a coding language',
     answers: [
@@ -63,7 +63,7 @@ const questionBank = [{
     ]
   },
   {
-    question: 'You can make an element change when a mouse hovers over it ',
+    question: 'You can make an element change when a mouse hovers over this ',
     answers: [
       {
         answerText: 'by magic',
@@ -121,19 +121,19 @@ const questionBank = [{
       score: 0
     }]
   }
-
+// loads score on the page
   document.getElementById('score').textContent = score
-
+// loads timer
   document.getElementById('timer').textContent = clock
-
+// start button functionality 
   document.getElementById('start').addEventListener('click', event => {
-
+// removes start button 
     event.target.remove()
   
-  
+// loads first question onto page  
     document.getElementById('question').textContent = questionBank[0].question
   
-
+// 1-4 answers
     let answerElem1 = document.createElement('li')
     answerElem1.className = 'list-group-item list-group-item-action answer'
     answerElem1.textContent = (questionBank[0].answers[0].answerText)
@@ -161,7 +161,7 @@ const questionBank = [{
     clockStart()
   })
   
- 
+ // function to start the timer 
   function clockStart() {
     time = setInterval(() => {
       clock--
@@ -174,7 +174,7 @@ const questionBank = [{
   }
   
   
-
+// retrieves user answer
   document.addEventListener('click', event => {
   
     if (event.target.classList.contains('answer')) {
@@ -190,14 +190,14 @@ const questionBank = [{
 
   function correctAnswer() {
   
-
+// Increases score if answer is right
     score = score + 100
     document.getElementById('score').textContent = score
   
-
+// Alerts user that the question answer they picked is right
     document.getElementById('result').innerHTML = '<id = "alert" div class="alert alert-success" role="alert">Great job! You got it right!</id >'
   
-
+// loads next question or ends game
     counter++
     if (counter < 10) {
       nextQuestion()
@@ -211,10 +211,10 @@ const questionBank = [{
   
   function wrongAnswer() {
   
-
+// Wrong answer subtracts 10 seconds
     clock = clock - 10
     document.getElementById('timer').textContent = clock
-
+// Alerts user that the answer they selected is wrong
     document.getElementById('result').innerHTML = '<div class="alert alert-danger" role="alert">Oops. 10 second penalty.</div >'
   
 
@@ -239,14 +239,14 @@ const questionBank = [{
   
   function nextQuestion() {
   
- 
+ // Next question is loaded onto the screen
     document.getElementById('question').textContent = questionBank[counter].question
   
-
+// Removes the previous answers
     removeElementsByClass()
   
   
-
+// Load next 4 answers...
     let answerElem1 = document.createElement('li')
     answerElem1.className = 'list-group-item list-group-item-action answer'
     answerElem1.textContent = (questionBank[counter].answers[0].answerText)
@@ -275,13 +275,14 @@ const questionBank = [{
     document.getElementById('answers').append(answerElem4)
   }
 
+  // End game
   function gameEnd() {
     removeElementsByClass()
     stopClock()
  
     document.getElementById('question').textContent = `Game over - Your score was: ${score}`
     document.getElementById('timer').parentNode.remove()
-
+// Initials form
     document.getElementById('row').innerHTML = `
     <div class="col">
       <input id = 'name' type="text" class="form-control" placeholder="Enter your name for high score records">
@@ -292,7 +293,7 @@ const questionBank = [{
       </button>
       </div>
     </div>`
- 
+ // scores sent to the local storage
     document.getElementById('submit').addEventListener('click', event => {
       event.preventDefault()
       let name = document.getElementById('name').value
@@ -306,12 +307,12 @@ const questionBank = [{
       document.getElementById('restart').innerHTML = '<button id= "again" type="button" class="btn btn-secondary">Try Again</button>'
     })
   }
-
+// user can restart the game
   document.getElementById('restart').addEventListener('click', event => {
     location.reload()
   })
   
-
+// stops timer when all is done
   function stopClock() {
     clearInterval(time)
     clock = 0
